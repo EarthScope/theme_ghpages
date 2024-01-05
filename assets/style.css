@@ -1,0 +1,13 @@
+.banner {
+  background-image: url(/assets/header-bg.jpg);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  padding: 1em 1em
+}
+
+.banner .logos {
+  display: flex;
+  align-items: flex-end
+}
