@@ -7,33 +7,60 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous" />
   <style>
-    .banner {
+    #header {
       background-image: url('{{"/assets/header-bg.jpg"|relative_url}}');
       background-position: 50%;
       background-repeat: no-repeat;
       background-size: cover;
-      position: relative;
-      padding: 1em 1em
+      padding: 1em 1em;
+      position: fixed;
+      width: 100%;
+      top: 0px;
+      transition: top 0.3s;
     }
 
-    .banner .logos {
+    #header .logos {
       display: flex;
-      align-items: flex-end
+      align-items: flex-end;
+    }
+
+    .content {
+      margin-top: 78px;
     }
   </style>
-  <link rel="shortcut
-    icon" href={{"/assets/favicon.ico" | relative_url }}>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const header = document.getElementById('header');
+      let prevScrollPos = window.pageYOffset;
+
+      window.onscroll = function () {
+        const currentScrollPos = window.pageYOffset;
+
+        if (prevScrollPos > currentScrollPos) {
+          header.style.top = '0';
+        } else {
+          header.style.top = '-78px';
+        }
+
+        prevScrollPos = currentScrollPos;
+      };
+    });
+  </script>
+  <link rel="shortcut icon" href={{"/assets/favicon.ico" | relative_url }}>
 </head>
 
 <body>
-  <div class="banner">
+  <div id="header">
     <div class="container">
       <div class="row main-row">
         <div class="col logos">
-          <a href="https://www.earthscope.org/"
-            style="border-right: 2px solid white; padding-right: 1em; margin-right: 1em;">
+          <a href="https://www.earthscope.org/" style="
+                border-right: 2px solid white;
+                padding-right: 1em;
+                margin-right: 1em;
+              ">
             <img height="50" src={{"/assets/earthscope-logo-white-mobile.svg" | relative_url}}
               alt="The EarthScope logo" />
           </a>
@@ -46,14 +73,7 @@
     </div>
   </div>
 
-
-
-
-
-
-
-  <div class="container">
-    {{ content }}</div>
+  <div class="container content">{{ content }}</div>
 </body>
 
 </html>
